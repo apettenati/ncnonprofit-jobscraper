@@ -138,9 +138,9 @@ def main():
         last_run = get_last_run_timestamp()
         new_jobs = get_new_jobs(jobs, last_run)
         if new_jobs:
-            # send_message(new_jobs, bot_api_key, bot_chat_id)
-            for job in new_jobs:
-                print(job)
+            send_message(new_jobs, bot_api_key, bot_chat_id)
+            # for job in new_jobs:
+            #     print(job)
         else:
             print('No new jobs!')
             send_message(new_jobs, bot_api_key, bot_chat_id)
@@ -148,5 +148,5 @@ def main():
         logger.info(f'Successfully ran at {get_last_run_timestamp()}')
 
 if __name__ == "__main__":
-    set_last_run_timestamp(datetime.date(2020, 12, 2))
+    # set_last_run_timestamp(datetime.date(2020, 12, 2))
     main()
