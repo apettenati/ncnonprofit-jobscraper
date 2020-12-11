@@ -44,8 +44,8 @@ def send_message(jobs, bot_api_key, bot_chat_id):
             #     job_string += f'{key}: {value}\n'
             job_string = make_job_message(job)
             bot.sendMessage(bot_chat_id, job_string, parse_mode='Markdown')
-    else:
-        bot.sendMessage(bot_chat_id, 'No new jobs!', parse_mode='Markdown')
+    # else:
+    #     bot.sendMessage(bot_chat_id, 'No new jobs!', parse_mode='Markdown')
 
 def make_job_message(job):
     job = f"[{job[0]}]({job[5]})\n" \

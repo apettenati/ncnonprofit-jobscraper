@@ -4,6 +4,7 @@ import datetime
 import logging
 import requests
 import argparse
+import os
 from bs4 import BeautifulSoup
 from rich import print
 from telegram import read_config, get_API_key, get_bot_chat_id, send_message
@@ -87,10 +88,10 @@ def get_last_run_timestamp():
     """
     with open('run_timestamp.txt') as file:
         date = file.read()
-        timestamp = datetime.datetime.strptime(date, '%d-%b-%y %H:%M:%S')
+        timestamp = datetime.datetime.strptime(date, '%d-%b-%y')
         return timestamp
 
-def set_last_run_timestamp(timestamp=datetime.datetime.now()):
+def set_last_run_timestamp(timestamp=None):
     """
     Creates datetime object showing last application run time
     Writes timestamp to file
@@ -98,9 +99,11 @@ def set_last_run_timestamp(timestamp=datetime.datetime.now()):
     Parameters:
     timestamp (datetime object): datetime which defaults to now
     """
+    if timestamp is None:
+        timestamp = datetime.datetime.now()
     with open('run_timestamp.txt', 'w') as file:
         timestamp = timestamp
-        file.write(str(datetime.datetime.strftime(timestamp, '%d-%b-%y %H:%M:%S')))
+        file.write(str(datetime.datetime.strftime(timestamp, '%d-%b-%y')))
 
 def get_new_jobs(jobs, last_run):
     """
@@ -148,5 +151,5 @@ def main():
         logger.info(f'Successfully ran at {get_last_run_timestamp()}')
 
 if __name__ == "__main__":
-    # set_last_run_timestamp(datetime.date(2020, 12, 2))
+    # set_last_run_timestamp(datetime.date(2020, 12, 3))
     main()
